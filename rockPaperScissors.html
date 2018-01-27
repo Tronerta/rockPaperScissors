@@ -5,9 +5,24 @@
 	<title>RockPaperScissors</title>
 	<script>
 		function computerPlay () {
-			let variations = ["Rock", "Paper", "Scissors"];
+			let variations = [1, 2, 3]; // 1 = Rock, 2 = Paper, 3 = Scissors
+
 			let computerSelection = variations[Math.floor(Math.random() * variations.length)];
-			console.log(computerSelection);
+			return computerSelection;
+		}
+
+		let playerSelection;
+		function getInput () {
+			playerSelection = prompt("Please, choose one of this:\n1: Rock\n2: Paper\n3: Scissors\nYou may  only print the coresponding numbers!")
+			if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
+				return true;
+			} else {
+				getInput();
+			}
+		}
+		
+		function playRound(playerSelection, computerSelection) {
+
 		}
 	</script>
 </head>
