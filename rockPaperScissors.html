@@ -16,13 +16,14 @@
 			}
 			// Prompting playerSelection
 			function getInput () {
-				playerSelection = parseInt(prompt("Please, choose one of this:\n1: Rock\n2: Paper\n3: Scissors\nYou may  only print the coresponding numbers!"))
+				playerSelection = parseInt(prompt("Please, choose one of this:\n1: Rock\n2: Paper\n3: Scissors\nYou may only print the coresponding numbers!"))
 				if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
 					true
 				} else {
 					getInput();
 				}
 			}
+			// Avaliable moves
 			let move1 = "Paper beats Rock!"
 			let move2 = "Rock beats Scissors!"
 			let move3 = "Scissors beats Paper!"
@@ -35,26 +36,26 @@
 				} else if (playerSelection == 1) {
 					if (computerSelection == 2) {
 						console.log(`You loose! ${move1}`);
-						computerScore += 1;
+						computerScore++;
 					} else if (computerSelection == 3) {
 						console.log(`You won! ${move2}`);
-						playerScore += 1;
+						playerScore++;
 					}
 				} else if (playerSelection == 2) {
 					if (computerSelection == 1) {
 						console.log(`You won! ${move1}`);
-						playerScore += 1;
+						playerScore++;
 					} else if (computerSelection == 3) {
 						console.log(`You loose! ${move3}`);
-						computerScore += 1;
+						computerScore++;
 					}
 				} else if (playerSelection == 3) {
 					if (computerSelection == 1) {
 						console.log(`You loose! ${move2}`)
-						computerScore += 1;
+						computerScore++;
 					} else if (computerSelection == 2) {
 						console.log(`You won! ${move3}`)
-						playerScore += 1;
+						playerScore++;
 					}
 				}
 			}
@@ -73,11 +74,11 @@
 			}
 
 			// Playing a game until someone will not score 3
-			function game() {
+			function playGame() {
 					checkScore();
 					playRound();
 					if (!checkScore()) {
-						game()
+						playGame()
 					} else {
 						true;
 					}
