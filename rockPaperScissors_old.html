@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>RockPaperScissors</title>
+		<script>
+			// Global variables
+			let computerSelection;
+			let playerSelection;
+			let playerScore = 0;
+			let computerScore = 0;
+			// Randomly chooses computerSelection
+			function computerPlay () {
+				let variations = [1, 2, 3]; // 1 = Rock, 2 = Paper, 3 = Scissors
+				computerSelection = variations[Math.floor(Math.random() * variations.length)];
+			}
+			// Prompting playerSelection
+			function getInput () {
+				playerSelection = parseInt(prompt("Please, choose one of this:\n1: Rock\n2: Paper\n3: Scissors\nYou may only print the coresponding numbers!"))
+				if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
+					true
+				} else {
+					getInput();
+				}
+			}
+			// Avaliable moves
+			let move1 = "Paper beats Rock!"
+			let move2 = "Rock beats Scissors!"
+			let move3 = "Scissors beats Paper!"
+			// 1 = Rock, 2 = Paper, 3 = Scissors
+			function playRound() { // Plays a simple round of game
+				getInput();
+				computerPlay();
+				if (playerSelection == computerSelection) {
+					console.log("It's a tie!");
+				} else if (playerSelection == 1) {
+					if (computerSelection == 2) {
+						console.log(`You loose! ${move1}`);
+						computerScore++;
+					} else if (computerSelection == 3) {
+						console.log(`You won! ${move2}`);
+						playerScore++;
+					}
+				} else if (playerSelection == 2) {
+					if (computerSelection == 1) {
+						console.log(`You won! ${move1}`);
+						playerScore++;
+					} else if (computerSelection == 3) {
+						console.log(`You loose! ${move3}`);
+						computerScore++;
+					}
+				} else if (playerSelection == 3) {
+					if (computerSelection == 1) {
+						console.log(`You loose! ${move2}`)
+						computerScore++;
+					} else if (computerSelection == 2) {
+						console.log(`You won! ${move3}`)
+						playerScore++;
+					}
+				}
+			}
+
+			// Checks the score
+			function checkScore() {
+				if (playerScore == 3) {
+					console.log(`You won! Your score is: ${playerScore}. Computer Score is: ${computerScore}`)
+					return true;
+				} else if (computerScore == 3) {
+					console.log(`You loose! Your score is: ${playerScore}. Computer Score is: ${computerScore}`)
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			// Playing a game until someone will not score 3
+			function playGame() {
+					checkScore();
+					playRound();
+					if (!checkScore()) {
+						playGame()
+					} else {
+						true;
+					}
+		}
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

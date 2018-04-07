@@ -3,7 +3,21 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>RockPaperScissors</title>
-		<script>
+		
+	</head>
+	<body>
+		
+		Choose your selection:<br>
+		<button onclick="getInputRock()">Rock</button>
+		<button onclick="getInputPaper()">Paper</button>
+		<button onclick="getInputScissors()">Scissors</button>
+
+		<p id="result"></p><br>
+		Your score is: <span id="playerScore"></span><br>
+		Computer score is: <span id="computerScore"></span><br>
+		<div id="finish"></div>
+
+	<script>
 			// Global variables
 			let computerSelection;
 			let playerSelection;
@@ -14,59 +28,90 @@
 				let variations = [1, 2, 3]; // 1 = Rock, 2 = Paper, 3 = Scissors
 				computerSelection = variations[Math.floor(Math.random() * variations.length)];
 			}
-			// Prompting playerSelection
-			function getInput () {
-				playerSelection = parseInt(prompt("Please, choose one of this:\n1: Rock\n2: Paper\n3: Scissors\nYou may only print the coresponding numbers!"))
-				if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
-					true
-				} else {
-					getInput();
-				}
+
+			// get input from buttons
+			function getInputRock () {
+				playerSelection = 1;
+				playGame();
 			}
+			function getInputPaper () {
+				playerSelection = 2;
+				playGame();
+			}
+			function getInputScissors () {
+				playerSelection = 3;
+				playGame();
+			}
+
+			// Prompting playerSelection
+			// function getInput () {
+			// 	playerSelection = parseInt(prompt("Please, choose one of this:\n1: Rock\n2: Paper\n3: Scissors\nYou may only print the coresponding numbers!"))
+			// 	if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
+			// 		true
+			// 	} else {
+			// 		getInput();
+			// 	}
+			// }
+
+
 			// Avaliable moves
 			let move1 = "Paper beats Rock!"
 			let move2 = "Rock beats Scissors!"
 			let move3 = "Scissors beats Paper!"
 			// 1 = Rock, 2 = Paper, 3 = Scissors
 			function playRound() { // Plays a simple round of game
-				getInput();
+				let result = document.querySelector('#result');
+				let scorePlayer = document.querySelector('#playerScore');
+				let scoreComputer = document.querySelector('#computerScore');
 				computerPlay();
 				if (playerSelection == computerSelection) {
-					console.log("It's a tie!");
+					result.textContent = "It's a tie!";
 				} else if (playerSelection == 1) {
 					if (computerSelection == 2) {
-						console.log(`You loose! ${move1}`);
+						result.textContent = `You loose! ${move1}`;
 						computerScore++;
+						scoreComputer.textContent = `${computerScore}`;
+						scorePlayer.textContent = `${playerScore}`;
 					} else if (computerSelection == 3) {
-						console.log(`You won! ${move2}`);
+						result.textContent = `You won! ${move2}`;
 						playerScore++;
+						scoreComputer.textContent = `${computerScore}`;
+						scorePlayer.textContent = `${playerScore}`;
 					}
 				} else if (playerSelection == 2) {
 					if (computerSelection == 1) {
-						console.log(`You won! ${move1}`);
+						result.textContent = `You won! ${move1}`;
 						playerScore++;
+						scoreComputer.textContent = `${computerScore}`;
+						scorePlayer.textContent = `${playerScore}`;
 					} else if (computerSelection == 3) {
-						console.log(`You loose! ${move3}`);
+						result.textContent = `You loose! ${move3}`;
 						computerScore++;
+						scoreComputer.textContent = `${computerScore}`;
+						scorePlayer.textContent = `${playerScore}`;
 					}
 				} else if (playerSelection == 3) {
 					if (computerSelection == 1) {
-						console.log(`You loose! ${move2}`)
+						result.textContent = `You loose! ${move2}`
 						computerScore++;
+						scoreComputer.textContent = `${computerScore}`;
+						scorePlayer.textContent = `${playerScore}`;
 					} else if (computerSelection == 2) {
-						console.log(`You won! ${move3}`)
+						result.textContent = `You won! ${move3}`
 						playerScore++;
+						scoreComputer.textContent = `${computerScore}`;
+						scorePlayer.textContent = `${playerScore}`;
 					}
 				}
 			}
-
+			let finish = document.querySelector('#finish');
 			// Checks the score
 			function checkScore() {
 				if (playerScore == 3) {
-					console.log(`You won! Your score is: ${playerScore}. Computer Score is: ${computerScore}`)
+					finish.textContent = `You won! Your score is: ${playerScore}. Computer Score is: ${computerScore}`
 					return true;
 				} else if (computerScore == 3) {
-					console.log(`You loose! Your score is: ${playerScore}. Computer Score is: ${computerScore}`)
+					finish.textContent = `You loose! Your score is: ${playerScore}. Computer Score is: ${computerScore}`
 					return true;
 				} else {
 					return false;
@@ -78,14 +123,11 @@
 					checkScore();
 					playRound();
 					if (!checkScore()) {
-						playGame()
+						false
 					} else {
 						true;
 					}
 		}
 		</script>
-	</head>
-	<body>
-		
 	</body>
 </html>
